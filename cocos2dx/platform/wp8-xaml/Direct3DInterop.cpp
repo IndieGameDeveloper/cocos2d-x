@@ -112,6 +112,13 @@ void Direct3DInterop::OnCocos2dKeyEvent(Cocos2dKeyEvent key, Platform::String^ t
     mInputEvents.push(e);
 }
 
+void Direct3DInterop::OnInMobiEvent(Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler)
+{
+	std::lock_guard<std::mutex> guard(mMutex);
+	std::shared_ptr<InMobiEvent> e(new InMobiEvent(sender, args, handler));
+	mInputEvents.push(e);
+}
+
 
 void Direct3DInterop::AddPointerEvent(PointerEventType type, PointerEventArgs^ args)
 {
@@ -178,6 +185,8 @@ bool Direct3DInterop::SendCocos2dEvent(Cocos2dEvent event)
     }
     return false;
 }
+
+
 
 
 }

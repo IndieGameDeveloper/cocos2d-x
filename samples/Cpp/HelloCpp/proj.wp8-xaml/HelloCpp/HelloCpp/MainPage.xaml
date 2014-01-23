@@ -15,7 +15,18 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <DrawingSurface x:Name="DrawingSurface" Loaded="DrawingSurface_Loaded" />
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+            <DrawingSurface x:Name="DrawingSurface" Loaded="DrawingSurface_Loaded" Margin="0,0,0,100"  />
+
+            <!-- Container where the IMAdView will be added at run time-->
+            <StackPanel x:Name="stackContainer" Height="100" VerticalAlignment="Bottom">
+                
+            </StackPanel>
+
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

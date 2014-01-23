@@ -13,6 +13,12 @@
     <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\DirectXBase.cpp" />
     <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Cocos2dRenderer.cpp" />
     <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEvent.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InMobi\InMobiDelegate.cpp">
+      <Filter>Classes\InMobi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InMobi\InMobiEvent.cpp">
+      <Filter>Classes\InMobi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Classes\AppDelegate.h">
@@ -32,10 +38,22 @@
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\DirectXHelper.h" />
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEvent.h" />
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEventTypes.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InMobi\ICallback.h">
+      <Filter>Classes\InMobi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InMobi\InMobiDelegate.h">
+      <Filter>Classes\InMobi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InMobi\InMobiEvent.h">
+      <Filter>Classes\InMobi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Classes">
       <UniqueIdentifier>{f9f8df92-c45f-4fb0-b53e-44782c0e0ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\InMobi">
+      <UniqueIdentifier>{28d99ac5-5264-49ba-8f39-366e41cf987a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include <memory>
 #include "Cocos2dRenderer.h"
 #include "InputEvent.h"
+#include "InMobiEvent.h"
+using namespace PhoneDirect3DXamlAppComponent::InMobiHelper;
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -54,6 +56,7 @@ public:
 
     void OnCocos2dKeyEvent(Cocos2dKeyEvent key);
     void OnCocos2dKeyEvent(Cocos2dKeyEvent key, Platform::String^ text);
+	void OnInMobiEvent(Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler);
 
     property Windows::Graphics::Display::DisplayOrientations WindowOrientation;
 

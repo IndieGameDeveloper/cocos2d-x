@@ -18,6 +18,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
 using Windows.UI.Input;
+using InMobi.WP.AdSDK;
+using PhoneDirect3DXamlAppComponent.InMobiHelper;
 
 namespace PhoneDirect3DXamlAppInterop
 {
@@ -58,6 +60,12 @@ namespace PhoneDirect3DXamlAppInterop
                 DrawingSurface.SetManipulationHandler(m_d3dInterop);
 
                 m_d3dInterop.SetCocos2dEventDelegate(OnCocos2dEvent);
+
+                InMobiDelegate adDelegate = new InMobiDelegate();
+
+                InMobiCallback adObj = new InMobiCallback();
+                adObj.SetMainPage(this);
+                adDelegate.SetCallback(adObj);
 
             }
         }
@@ -126,6 +134,27 @@ namespace PhoneDirect3DXamlAppInterop
                         break;
                 }
             });  
+        }
+
+        // add to the container
+        public void AddBannerAd(IMAdView adView)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                this.stackContainer.Children.Add(adView);
+            });            
+        }
+
+        public void SwitchBottomBar()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                bool bIsVisible = Visibility.Visible == this.stackContainer.Visibility;
+                this.stackContainer.Visibility = (bIsVisible ? Visibility.Collapsed : Visibility.Visible);
+                Thickness srcMargin = this.DrawingSurface.Margin;
+                srcMargin.Bottom = bIsVisible ? 0 : 100;
+                this.DrawingSurface.Margin = srcMargin;    
+            });
         }
     }
 }
