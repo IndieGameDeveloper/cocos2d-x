@@ -2,7 +2,7 @@ namespace PhoneDirect3DXamlAppComponent
 {
 	namespace AdControlHelper
 	{
-		// An asynchronous completed event argument, similar with OpenXLive.Feature.AsyncProcessResult.
+		// An asynchronous completed event argument
 		public ref class CompletedEventArgs sealed
 		{
 		public:

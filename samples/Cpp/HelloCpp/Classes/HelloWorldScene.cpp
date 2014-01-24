@@ -124,6 +124,14 @@ void HelloWorld::menuCallbackBottom( CCObject* pSender )
 			wcstombs(chars, wide_chars, 512);
 			pResponseLabel->setString(chars);
 	});
+	AdControlObj->GlobalCallback->OnBannerRefreshed += ref new Windows::Foundation::EventHandler<CompletedEventArgs^>(
+		[this](Platform::Object^ sender, CompletedEventArgs^ args){
+			Platform::String ^platform_string = args->ErrorMessage;
+			const wchar_t* wide_chars = platform_string->Data();
+			char chars[512];
+			wcstombs(chars, wide_chars, 512);
+			pResponseLabel->setString(chars);
+	});
 	AdControlObj->GlobalCallback->SwitchBottomBar();
 
 	

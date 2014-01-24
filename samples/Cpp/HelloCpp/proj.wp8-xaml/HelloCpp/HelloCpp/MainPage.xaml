@@ -21,7 +21,7 @@
 
             <DrawingSurface x:Name="DrawingSurface" Loaded="DrawingSurface_Loaded" Margin="0,0,0,0"  />
 
-            <!-- Container where the IMAdView will be added at run time-->
+            <!-- Container where the adcontrol will be added at run time-->
             <StackPanel x:Name="stackContainer" Height="0" VerticalAlignment="Bottom" Visibility="Collapsed">
             </StackPanel>
 

@@ -65,6 +65,7 @@ namespace PhoneDirect3DXamlAppInterop
 
                 AdControlCallback adObj = new AdControlCallback();
                 adObj.SetMainPage(this);
+                adObj.SetDirect3DInterop(m_d3dInterop);
                 adDelegate.SetCallback(adObj);
 
             }
