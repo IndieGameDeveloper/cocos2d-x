@@ -1,6 +1,6 @@
 namespace PhoneDirect3DXamlAppComponent
 {
-	namespace InMobiHelper
+	namespace AdControlHelper
 	{
 		// An asynchronous completed event argument, similar with OpenXLive.Feature.AsyncProcessResult.
 		public ref class CompletedEventArgs sealed
@@ -21,7 +21,7 @@ namespace PhoneDirect3DXamlAppComponent
 		public interface class ICallback
 		{
 			// Submit a score completed event.
-			event Windows::Foundation::EventHandler<CompletedEventArgs^>^ OnBannerReceived;
+			event Windows::Foundation::EventHandler<CompletedEventArgs^>^ OnBannerRefreshed;
 			event Windows::Foundation::EventHandler<CompletedEventArgs^>^ OnBannerReceivedFailed;
 			void CreateBannerAd();
 

@@ -3,14 +3,14 @@
 #include "ICallback.h"
 #include "InputEvent.h"
 using namespace Platform;
-using namespace PhoneDirect3DXamlAppComponent::InMobiHelper;
+using namespace PhoneDirect3DXamlAppComponent::AdControlHelper;
 
 namespace PhoneDirect3DXamlAppComponent
 {
-	class InMobiEvent : public InputEvent
+	class AdControlEvent : public InputEvent
 	{
 	public:
-		InMobiEvent(Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler);
+		AdControlEvent(Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler);
 		virtual void execute(Cocos2dRenderer ^ renderer);
 
 	private:

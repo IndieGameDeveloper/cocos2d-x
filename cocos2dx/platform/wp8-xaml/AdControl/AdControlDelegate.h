@@ -4,12 +4,12 @@
 
 namespace PhoneDirect3DXamlAppComponent
 {
-	namespace InMobiHelper
+	namespace AdControlHelper
 	{
-		public ref class InMobiDelegate sealed
+		public ref class AdControlDelegate sealed
 		{
 		public:
-			InMobiDelegate(void);
+			AdControlDelegate(void);
 
 			void SetCallback(ICallback^ callback);
 

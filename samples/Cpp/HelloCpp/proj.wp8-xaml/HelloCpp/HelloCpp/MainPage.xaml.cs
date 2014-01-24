@@ -18,8 +18,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
 using Windows.UI.Input;
-using InMobi.WP.AdSDK;
-using PhoneDirect3DXamlAppComponent.InMobiHelper;
+using PhoneDirect3DXamlAppComponent.AdControlHelper;
+using Microsoft.Advertising.Mobile.UI;
 
 namespace PhoneDirect3DXamlAppInterop
 {
@@ -61,9 +61,9 @@ namespace PhoneDirect3DXamlAppInterop
 
                 m_d3dInterop.SetCocos2dEventDelegate(OnCocos2dEvent);
 
-                InMobiDelegate adDelegate = new InMobiDelegate();
+                AdControlDelegate adDelegate = new AdControlDelegate();
 
-                InMobiCallback adObj = new InMobiCallback();
+                AdControlCallback adObj = new AdControlCallback();
                 adObj.SetMainPage(this);
                 adDelegate.SetCallback(adObj);
 
@@ -137,7 +137,7 @@ namespace PhoneDirect3DXamlAppInterop
         }
 
         // add to the container
-        public void AddBannerAd(IMAdView adView)
+        public void AddBannerAd(AdControl adView)
         {
             Dispatcher.BeginInvoke(() =>
             {
@@ -151,9 +151,14 @@ namespace PhoneDirect3DXamlAppInterop
             {
                 bool bIsVisible = Visibility.Visible == this.stackContainer.Visibility;
                 this.stackContainer.Visibility = (bIsVisible ? Visibility.Collapsed : Visibility.Visible);
+
+                // reMargin DrawingSurface
                 Thickness srcMargin = this.DrawingSurface.Margin;
                 srcMargin.Bottom = bIsVisible ? 0 : 100;
-                this.DrawingSurface.Margin = srcMargin;    
+                this.DrawingSurface.Margin = srcMargin;
+
+                // reHeight stackcontainer
+                this.stackContainer.Height = bIsVisible ? 0 : 100;
             });
         }
     }

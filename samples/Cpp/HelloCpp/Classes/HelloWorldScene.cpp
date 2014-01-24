@@ -1,7 +1,7 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
-#include "InMobiDelegate.h"
-using namespace PhoneDirect3DXamlAppComponent::InMobiHelper;
+#include "AdControlDelegate.h"
+using namespace PhoneDirect3DXamlAppComponent::AdControlHelper;
 USING_NS_CC;
 
 CCLabelTTF* pResponseLabel;
@@ -115,8 +115,8 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 
 void HelloWorld::menuCallbackBottom( CCObject* pSender )
 {
-	InMobiDelegate^ InMobiObj = ref new InMobiDelegate();
-	InMobiObj->GlobalCallback->OnBannerReceived += ref new Windows::Foundation::EventHandler<CompletedEventArgs^>(
+	AdControlDelegate^ AdControlObj = ref new AdControlDelegate();
+	AdControlObj->GlobalCallback->OnBannerReceivedFailed += ref new Windows::Foundation::EventHandler<CompletedEventArgs^>(
 		[this](Platform::Object^ sender, CompletedEventArgs^ args){
 			Platform::String ^platform_string = args->ErrorMessage;
 			const wchar_t* wide_chars = platform_string->Data();
@@ -124,7 +124,7 @@ void HelloWorld::menuCallbackBottom( CCObject* pSender )
 			wcstombs(chars, wide_chars, 512);
 			pResponseLabel->setString(chars);
 	});
-	InMobiObj->GlobalCallback->SwitchBottomBar();
+	AdControlObj->GlobalCallback->SwitchBottomBar();
 
 	
 }
