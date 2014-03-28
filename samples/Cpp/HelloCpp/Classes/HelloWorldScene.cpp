@@ -126,5 +126,4 @@ void HelloWorld::menuCallbackBottom( CCObject* pSender )
             pResponseLabel->setString(chars);
     });
     IAPObj->GlobalCallback->GetIAP();
-    //CCDirector::sharedDirector()->end();
 }
