@@ -12,6 +12,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+#if DEBUG
+using MockIAPLib;
+using Store = MockIAPLib;
+#else
+using Windows.ApplicationModel.Store;
+using Store = Windows.ApplicationModel.Store;
+#endif
 
 namespace PhoneDirect3DXamlAppInterop
 {
@@ -57,7 +64,105 @@ namespace PhoneDirect3DXamlAppInterop
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            SetupMockIAP();
+
         }
+
+        private void SetupMockIAP()
+        {
+#if DEBUG
+            MockIAP.Init();
+            MockIAP.RunInMockMode(true);
+            MockIAP.SetListingInformation(1, "en-us", "Some description", "1", "TestApp");
+
+            // Add some more items manually.
+
+            ProductListing p = new ProductListing
+            {
+                Name = "img.1",
+                ImageUri = new Uri("/Res/Image/1.png", UriKind.Relative),
+                ProductId = "img.1",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.1", p);
+
+            p = new ProductListing
+            {
+                Name = "img.2",
+                ImageUri = new Uri("/Res/Image/2.png", UriKind.Relative),
+                ProductId = "img.2",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.2", p);
+
+            p = new ProductListing
+            {
+                Name = "img.3",
+                ImageUri = new Uri("/Res/Image/3.png", UriKind.Relative),
+                ProductId = "img.3",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.3", p);
+
+            p = new ProductListing
+            {
+                Name = "img.4",
+                ImageUri = new Uri("/Res/Image/4.png", UriKind.Relative),
+                ProductId = "img.4",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.4", p);
+
+            p = new ProductListing
+            {
+                Name = "img.5",
+                ImageUri = new Uri("/Res/Image/5.png", UriKind.Relative),
+                ProductId = "img.5",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.5", p);
+
+            p = new ProductListing
+            {
+                Name = "img.6",
+                ImageUri = new Uri("/Res/Image/6.png", UriKind.Relative),
+                ProductId = "img.6",
+                ProductType = Windows.ApplicationModel.Store.ProductType.Durable,
+                Keywords = new string[] { "image" },
+                Description = "Nice image",
+                FormattedPrice = "1.0",
+                Tag = string.Empty
+            };
+
+            MockIAP.AddProductListing("img.6", p);
+#endif
+        }
+
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated

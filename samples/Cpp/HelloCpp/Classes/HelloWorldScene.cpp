@@ -1,7 +1,10 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
+#include "IAPDelegate.h"
+using namespace PhoneDirect3DXamlAppComponent::IAPHelper;
 USING_NS_CC;
 
+CCLabelTTF* pResponseLabel;
 
 CCScene* HelloWorld::scene()
 {
@@ -50,6 +53,18 @@ bool HelloWorld::init()
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
 
+    // Label Item (CCLabelBMFont)
+    CCMenuItemFont::setFontName("Marker Felt");
+    CCMenuItemFont::setFontSize(28);
+    CCMenuItemFont* pLabelItem = CCMenuItemFont::create("start IAP", this, menu_selector(HelloWorld::menuCallbackBottom));
+    pLabelItem->setPosition(ccp(origin.x + pLabelItem->getContentSize().width/2,
+        origin.y + visibleSize.height - pCloseItem->getContentSize().height/2 - 50));
+
+    // create menu, it's an autorelease object
+    CCMenu* pLabelMenu = CCMenu::create(pLabelItem, NULL);
+    pLabelMenu->setPosition(CCPointZero);
+    this->addChild(pLabelMenu, 1);
+
     /////////////////////////////
     // 3. add your codes below...
 
@@ -64,6 +79,15 @@ bool HelloWorld::init()
 
     // add the label as a child to this layer
     this->addChild(pLabel, 1);
+
+    pResponseLabel = CCLabelTTF::create("response", "Arial", TITLE_FONT_SIZE);
+
+    // position the label on the center of the screen
+    pResponseLabel->setPosition(ccp(origin.x + visibleSize.width/2,
+        origin.y + pResponseLabel->getContentSize().height));
+
+    // add the label as a child to this layer
+    this->addChild(pResponseLabel, 1);
 
     // add "HelloWorld" splash screen"
     CCSprite* pSprite = CCSprite::create("HelloWorld.png");
@@ -88,4 +112,19 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
     exit(0);
 #endif
 #endif
+}
+
+void HelloWorld::menuCallbackBottom( CCObject* pSender )
+{
+    IAPDelegate^ IAPObj = ref new IAPDelegate();
+    IAPObj->GlobalCallback->OnItemsRefreshed += ref new Windows::Foundation::EventHandler<CompletedEventArgs^>(
+        [this](Platform::Object^ sender, CompletedEventArgs^ args){
+            Platform::String ^platform_string = args->purchasedItems;
+            const wchar_t* wide_chars = platform_string->Data();
+            char chars[512];
+            wcstombs(chars, wide_chars, 512);
+            pResponseLabel->setString(chars);
+    });
+    IAPObj->GlobalCallback->GetIAP();
+    //CCDirector::sharedDirector()->end();
 }

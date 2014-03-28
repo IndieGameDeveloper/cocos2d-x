@@ -18,6 +18,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Phone.Shell;
 using Windows.UI.Input;
+using PhoneDirect3DXamlAppComponent.IAPHelper;
+using PhoneDirect3DXamlAppInterop.Resources;
+using System.Collections.ObjectModel;
 
 namespace PhoneDirect3DXamlAppInterop
 {
@@ -30,6 +33,8 @@ namespace PhoneDirect3DXamlAppInterop
 
         // invisible XAML TextBox for Cocos2d-x keyboard input
         TextBox m_textBox = null;
+
+        IAPCallback IAPObj = null;
 
         // Constructor
         public MainPage()
@@ -57,6 +62,13 @@ namespace PhoneDirect3DXamlAppInterop
                 m_d3dInterop.SetCocos2dEventDelegate(OnCocos2dEvent);
                 m_d3dInterop.SetCocos2dMessageBoxDelegate(OnCocos2dMessageBoxEvent);
                 m_d3dInterop.SetCocos2dEditBoxDelegate(OpenEditBox);
+
+                IAPDelegate iapDelegate = new IAPDelegate();
+
+                IAPObj = new IAPCallback();
+                IAPObj.SetMainPage(this);
+                IAPObj.SetDirect3DInterop(m_d3dInterop);
+                iapDelegate.SetCallback(IAPObj);
             }
         }
 
@@ -161,6 +173,45 @@ namespace PhoneDirect3DXamlAppInterop
             {
                 m_d3dInterop.OnCocos2dEditboxEvent(sender, str, m_receiveHandler);
             }
+        }
+
+        public void GetIAP()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                GoToStoreFront(null, null);
+            });
+        }
+
+        private void GoToStoreFront(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/PhoneDirect3DXamlAppInterop;component/StoreFront.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            RenderPurchasedItems();
+            base.OnNavigatedTo(e);
+        }
+
+        private async void RenderPurchasedItems()
+        {
+            StoreManager mySM = new StoreManager();
+            List<string> li = await mySM.GetOwnedItems();
+            string strItemsReceived = "";
+            foreach (string listItem in li)
+            {
+                //if (listItem != string.Empty)
+                //{
+                //    picItems.Add(new PicItem { imgLink = listItem });
+                //}
+                strItemsReceived += listItem + ",";
+            }
+            if (IAPObj != null && strItemsReceived.Length > 0)
+            {
+                IAPObj.ReceivedResponse(strItemsReceived);
+            }
+            //pics.ItemsSource = picItems;
         }
     }
 }

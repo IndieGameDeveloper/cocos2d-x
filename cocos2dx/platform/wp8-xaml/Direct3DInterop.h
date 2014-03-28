@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include <memory>
 #include "Cocos2dRenderer.h"
 #include "InputEvent.h"
+#include "IAPEvent.h"
+using namespace PhoneDirect3DXamlAppComponent::IAPHelper;
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -55,6 +57,7 @@ public:
     void OnCocos2dKeyEvent(Cocos2dKeyEvent key);
     void OnCocos2dKeyEvent(Cocos2dKeyEvent key, Platform::String^ text);
 	void OnCocos2dEditboxEvent(Object^ sender, Platform::String^ args, Windows::Foundation::EventHandler<Platform::String^>^ handler);
+    void OnIAPEvent(Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler);
 
     property Windows::Graphics::Display::DisplayOrientations WindowOrientation;
     property Windows::Foundation::Size WindowBounds;

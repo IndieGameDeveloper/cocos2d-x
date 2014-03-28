@@ -203,4 +203,12 @@ bool Direct3DInterop::SendCocos2dEvent(Cocos2dEvent event)
     return false;
 }
 
+void Direct3DInterop::OnIAPEvent( Object^ sender, CompletedEventArgs^ args, Windows::Foundation::EventHandler<CompletedEventArgs^>^ handler )
+{
+    std::lock_guard<std::mutex> guard(mMutex);
+    std::shared_ptr<IAPEvent> e(new IAPEvent(sender, args, handler));
+    mInputEvents.push(e);
+}
+
+
 }

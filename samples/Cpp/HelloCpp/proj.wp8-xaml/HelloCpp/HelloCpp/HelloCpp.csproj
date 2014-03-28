@@ -102,6 +102,7 @@
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IAPCallback.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -109,6 +110,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StoreFront.xaml.cs">
+      <DependentUpon>StoreFront.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StoreManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
@@ -117,6 +122,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Res\Image\1.png" />
+    <Content Include="Res\Image\2.png" />
+    <Content Include="Res\Image\3.png" />
+    <Content Include="Res\Image\4.png" />
+    <Content Include="Res\Image\5.png" />
+    <Content Include="Res\Image\6.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
@@ -171,6 +182,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="StoreFront.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MockIAPLib">
+      <HintPath>..\MockIAPLib\Bin\x86\Debug\MockIAPLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
